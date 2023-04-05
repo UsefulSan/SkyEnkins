@@ -1,19 +1,13 @@
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView, FormView, ListView, DeleteView, UpdateView
-from rest_framework.generics import ListAPIView
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
-from django.contrib.auth import get_user_model
 
-from app import tasks
-from app.forms import RegisterForm, LoginForm, UploadFileForm
+from app.forms import RegisterForm, UploadFileForm
 from app.models import User, File
-from app.serializers import UserSerializer, FileListSerializer
+from app.serializers import UserSerializer
 
 
 class UserCreate(CreateView):
@@ -22,13 +16,6 @@ class UserCreate(CreateView):
     success_url = "/"
     template_name = "app/signup.html"
 
-    # def post(self, request, *args, **kwargs):
-    #     form = UploadFileForm(request.POST, request.FILES)
-    #     if form.is_valid():
-    #         instance = User(username=request.POST.get("username", None), email=request.POST.get("email", None))
-    #         instance.set_password(request.POST.get("password", None))
-    #         instance.save()
-    #     return super().post(request, *args, **kwargs)
 
 class AuthView(LoginView):
     # form_class = LoginForm
@@ -61,15 +48,6 @@ class UploadView(LoginRequiredMixin, FormView):
             instance.save()
         return super().post(request)
 
-
-# class FileListView(ListAPIView):
-#     serializer_class = FileListSerializer
-#     permission_classes = [IsAuthenticated]
-#
-#
-#     def get(self, request):
-#         self.queryset = File.objects.filter(owner_id__exact=request.user.id)
-#         return render(request, "app/home.html", context=request.context)
 
 class FileListView(LoginRequiredMixin, ListView):
     model = File

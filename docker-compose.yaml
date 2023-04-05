@@ -14,7 +14,7 @@ services:
       context: .
     command: bash -c "python manage.py runserver 0.0.0.0:8000"
     ports:
-    - "8000:8000"
+      - "8000:8000"
     volumes:
       - "./static:/django/static"
       - "./media:/django/media"
@@ -29,7 +29,7 @@ services:
       POSTGRES_PASSWORD: 12321
       POSTGRES_DB: skyenkins
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
       interval: 5s
       timeout: 5s
       retries: 5

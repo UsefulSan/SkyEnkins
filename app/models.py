@@ -2,14 +2,14 @@ from django.contrib.auth.models import AbstractUser
 from django.core.validators import FileExtensionValidator
 from django.db import models
 
-
 from skyenkins import settings
 
 
 class File(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     file = models.FileField(upload_to='', validators=[FileExtensionValidator(allowed_extensions=['py'])])
-    mark = models.CharField(max_length=8, choices=[("new", "новый"), ("changed", "изменено"), ("verified", "проверено")])
+    mark = models.CharField(max_length=8,
+                            choices=[("new", "новый"), ("changed", "изменено"), ("verified", "проверено")])
     created = models.DateTimeField(auto_now_add=True)
     changed = models.DateTimeField(auto_now=True, null=True)
     logs = models.FileField(upload_to="", null=True)

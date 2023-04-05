@@ -1,9 +1,8 @@
 from django.contrib.auth.views import LogoutView
-from django.urls import path, include
+from django.urls import path
+from rest_framework import routers
 
 from app import views
-
-from rest_framework import routers
 
 router = routers.SimpleRouter()
 router.register(r'users', views.UserViewSet, basename="user")
