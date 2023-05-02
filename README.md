@@ -14,7 +14,7 @@
 
 Клонируйте репозиторий.
 
-Находясь в папке с кодом создайте виртуальное окружение `python -m venv venv`, активируйте его (Windows: `venv\scripts\activate`; Linux/Mac: `source venv/bin/activate`), установите зависимости `python -m pip install -r requirements.txt`.
+Находясь в папке с кодом создайте виртуальное окружение `python -m venv venv`, активируйте его (Windows: `venv\Scripts\activate.bat`; Linux/Mac: `source venv/bin/activate`), установите зависимости `python -m pip install -r requirements.txt`.
 Переименуйте `.env.example` в `.env` и заполните его.
 
 Для локального запуска, находясь в директории проекта выполните команды:
